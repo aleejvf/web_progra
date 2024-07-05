@@ -1,0 +1,67 @@
+{% extends 'crud/base_admin.html' %} 
+{% load static %}
+
+{% block links %}
+  <link rel="stylesheet" href="{% static 'crud/CSS/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'crud/CSS/bootstrap.min.css' %}">
+  {% endblock links %}
+
+{% block contenido %}
+<div class="container mt-3">
+  <div class="card">
+      <div class="card-header">
+          <h2 class="text-center">Editar producto</h2>
+      </div>
+      <div class="card-body">
+          <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row mb-3">
+                  <div class="col-md-6">
+                      <label for="id_nombre" class="form-label">Nombre:</label>
+                      {{ form.nombre }}
+                  </div>
+                  <div class="col-md-6">
+                      <label for="id_tipo" class="form-label">Tipo:</label>
+                      {{form.categoria }}
+                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col-md-6">
+                      <label for="id_tamaño" class="form-label">Tamaño:</label>
+                      {{ form.tamaño }}
+                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col-md-6">
+                      <label for="id_dinero" class="form-label">Dinero:</label>
+                      {{ form.precio }}
+                  </div>
+                  <div class="col-md-6">
+                      <label for="id_stock" class="form-label">Stock:</label>
+                      {{ form.cantidad_disponible }}
+                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col-12">
+                      <label for="id_descripcion" class="form-label">Descripción:</label>
+                      {{ form.descripcion }}
+                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col-12">
+                      <label for="id_imagen" class="form-label">Imagen:</label>
+                      {{ form.foto }}
+                  </div>
+              </div>
+              <div class="text-end">
+                <a class="btn btn-secondary mx-2" href="{% url 'adm_productos'%}"><i>Cancelar</i></a>
+                  <input type="submit" value="Editar" class="btn btn-primary">
+              </div>
+          </form>
+          {{mensaje}}
+      </div>
+  </div>
+</div>
+
+
+{% endblock contenido %}

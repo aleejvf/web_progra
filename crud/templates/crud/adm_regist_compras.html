@@ -1,0 +1,43 @@
+{% extends 'crud/base_admin.html' %} 
+{% load static %}
+
+    {% block links%}
+      <link rel="stylesheet" href=" {% static 'crud/CSS/styles.css'%}">
+    {% endblock links %}
+
+    {% block contenido%}
+
+  
+
+  <div class="container my-4">
+    <h2 class="text-center">Registros de Compras</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Fecha de Compra</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Email</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+            <tr>
+                <td>{{ registro.fecha_compra }}</td>
+                <td>{{ registro.usuario }}</td>
+                <td>{{ registro.celular }}</td>
+                <td>{{ registro.email }}</td>
+                <td>{{ registro.total }}</td>
+                <td>
+                    <a href="{% url 'adm_detalle_registro' registro.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+  </div>
+  {% endblock%}

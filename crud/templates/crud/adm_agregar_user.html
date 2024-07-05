@@ -1,0 +1,82 @@
+{% extends 'crud/base_admin.html' %} 
+{% load static %}
+
+{% block links %}
+  <link rel="stylesheet" href="{% static 'crud/CSS/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'crud/CSS/bootstrap.min.css' %}">
+  {% endblock links %}
+
+{% block contenido %}
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Agregar Usuario</h2>
+        </div>
+        <div class="card-body">
+            <form id="validar_Formulario" method="post" action="{% url "adm_agregar_user" %}">
+                {% csrf_token %}
+                <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="nombre_usuario" class="form-label">Nombre Usuario</label>
+                    <input type="text" class="form-control" id="nombre_usuario"  name="nombre_usuario">
+                  </div>
+                
+                  <div class="col-sm-6">
+                    <label for="rut" class="form-label">Rut</label>
+                    <input type="text" class="form-control" id="rut"  name="rut" >
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre"  name="nombre">
+                  </div>
+        
+                  <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="lastName"   name="lastName">
+                  </div>
+        
+                  <div class="col-sm-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email"   name="email">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="idcelular" class="form-label">Celular</label>
+                    <input type="number" class="form-control" id="idcelular"   name="idcelular">
+                  </div>
+                  <div class="col-md-9">
+                    <label for="address" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" id="address"   name="address">
+                  </div>
+        
+                  <div class="col-md-3">
+                    <label for="zip" class="form-label">Codigo Postal</label>
+                    <input type="text" class="form-control" id="zip"  name="zip">
+                  </div>
+        
+                  <div class="col-sm-6">
+                    <label for="contraseña1" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="contraseña1"   name="contraseña1">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="contraseña2" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" class="form-control" id="contraseña2"   name="contraseña2">
+                  </div>
+        
+        
+        
+                    <!--cambiar el onclick por un a type button (el js cambiar para true y false en return)-->
+                    <button type="button" onclick="validar_Formulario()"  class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-secondary mx-2" href="{% url 'adm_regist_users'%}"><i>Cancelar</i></a>
+                  </div>
+                  <hr class="my-4">
+        
+        
+              </form>
+            {{mensajeuser}}
+        </div>
+    </div>
+  </div>
+  
+</div>
+{% endblock contenido %}
+
