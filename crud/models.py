@@ -11,16 +11,32 @@ class User(AbstractUser):
     celular=models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(999999999)], null=False)
     postal=models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(9999999)], null=False)
 
-
-# MODELO PRODUCTO
+# MODELO REGISTRO
 class Producto(models.Model):
+    ANILLO = 'Anillo'
+    ARO = 'Aro'
+    COLLAR = 'Collar'
+    TIPO_CHOICES = [
+        (ANILLO, 'Anillo'),
+        (ARO, 'Aro'),
+        (COLLAR, 'Collar'),
+    ]
+
+    GRANDE = 'Grande'
+    MEDIANO = 'Mediano'
+    PEQUEÑO = 'Pequeño'
+    TAMAÑO_CHOICES = [
+        (GRANDE, 'Grande'),
+        (MEDIANO, 'Mediano'),
+        (PEQUEÑO, 'Pequeño'),
+    ]
     nombre=models.CharField(max_length=50, null=False)
-    descripcion = models.TextField(null=False)
-    foto=models.ImageField(upload_to='productos',null=True)
+    descripcion = models.TextField()
+    foto = models.ImageField(upload_to='productos',null=True)
     precio=models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    cantidad_disponible = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    cantidad_disponible = models.IntegerField(default=0, validators=[MinValueValidator(0)])    
     categoria = models.CharField(max_length=6, choices=TIPO_CHOICES)
-    tamaño = models.CharField(max_length=7, choices=TAMANO_CHOICES)
+    tamaño = models.CharField(max_length=7, choices=TAMAÑO_CHOICES)
 
     def __str__ (self):
         return f"{self.id} -  {self.nombre} {self.descripcion}"
@@ -43,7 +59,7 @@ class Carrito_item(models.Model):
         return f"Id: {self.pk} | Producto: {self.producto.nombre} | Carrito_id: {self.carrito.id}"
 
 
-# MODELO REGISTRO
+
 class Registro(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     productos = models.ManyToManyField('Producto', through='RegistroItem')

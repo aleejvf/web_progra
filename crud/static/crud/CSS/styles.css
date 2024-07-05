@@ -1,0 +1,40 @@
+.navbar .nav-link {
+  font-size: 10px; /* Tamaño de texto reducido */
+  margin-right: 40px; /* Espacio entre frases */
+  margin-left: 40px; /* Espacio entre frases */
+  padding-top: 5px; /* Reducir el espacio superior del enlace */
+  padding-bottom: 5px; /* Reducir el espacio inferior del enlace */
+  color: white; /* Color del texto */
+  text-decoration: none; /* Eliminar subrayado */
+}
+.icon-user{
+font-variation-settings:
+'FILL' 0,
+'wght' 400,
+'GRAD' 0,
+'opsz' 24
+}
+.product-container {
+  background-color: #ada9a9; /* Color gris claro */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-bottom: 20px; /* Espaciado inferior */
+}html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex: 1;
+}
+footer {
+  background-color: #45526e;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top:20;
+}

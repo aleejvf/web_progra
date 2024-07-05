@@ -1,0 +1,78 @@
+{% extends 'crud/base_admin.html' %} 
+{% load static %}
+
+    {% block links%}
+      <link rel="stylesheet" href=" {% static 'crud/CSS/styles.css'%}">
+    {% endblock links %}
+
+    {% block contenido%}
+
+<!-- imagen loop -->
+
+    <div class="container py-4">
+        <h1 class="mb-4">Administración de Usuarios</h1>
+        
+        <!-- Barra de búsqueda -->
+        <div class="input-group mb-3">
+        
+                <div class="col-md-6 text-start">
+                    <!-- Botón para abrir el modal de agregar producto -->
+                    <a class="btn btn-primary" href="{% url 'adm_agregar_user' %}">
+                        Agregar Usuario
+                    </a>
+                </div>
+        </div>
+        
+        <!-- Tabla de usuarios -->
+        <div class="table-responsive">
+            
+                
+        
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>RUT</th>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Dirección</th>
+                        <th>Email</th>
+                        <th>Celular</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if user.is_authenticated %}
+                        {% for p in usuario %}
+                            {% if user.id != p.id %}
+                                <tr>
+                                    <td>{{ p.rut }}</td>
+                                    <td>{{ p.username }}</td>
+                                    <td>{{ p.first_name }}</td>
+                                    <td>{{ p.last_name }}</td>
+                                    <td>{{ p.direccion }}</td>
+                                    <td>{{ p.email }}</td>
+                                    <td>{{ p.celular }}</td>
+                                    
+                                    <td>
+                                        <a class="btn btn-sm btn-warning" href="{% url 'adm_modificar_user' p.id %}">
+                                            Modificar
+                                        </a>
+                                        <a href="#" onclick="eliminarUsuario({{ p.id }})" class="btn btn-sm btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No hay usuarios disponibles.</td>
+                        </tr>
+                        {% endfor %}    
+                    {% endif %}
+                    
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    
+    {% endblock%}

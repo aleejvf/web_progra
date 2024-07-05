@@ -1,0 +1,35 @@
+{% extends 'crud/base_admin.html' %} 
+{% load static %}
+
+    {% block links%}
+      <link rel="stylesheet" href=" {% static 'crud/CSS/styles.css'%}">
+    {% endblock links %}
+
+    {% block contenido%}
+
+  
+
+    <div class="table-responsive p-4">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio Unitario</th>
+                    <th scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.nombre_producto }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.precio_producto }}</td>
+                    <td>{{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+  {% endblock%}

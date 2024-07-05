@@ -2,6 +2,8 @@ from django import forms
 from .models import User
 from .enumeraciones import *
 from django.contrib.auth.forms import UserCreationForm
+from .models import Producto,User
+from django.contrib.auth.forms import UserCreationForm
 
 ##FILTRO PRODUCTOS
 class FiltroProductoForm(forms.Form):
@@ -20,6 +22,17 @@ class UserForm(UserCreationForm):
     class Meta:
         model=User
         fields=['username','rut','first_name','last_name','celular','email','direccion','postal','password1','password2']
+
+class Productoform(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = '__all__'
+
+class Usuarioform(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__'
+     
 
 ##ACTUALIZA USUARIO
 class UpdateUserForm(forms.ModelForm):
