@@ -1,24 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto,User,Registro,RegistroItem
-from .forms import Productoform,UpdateUserForm
+from .forms import Productoform,UpdateUserForm, FiltroProductoForm,UsernameEmailForm
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth import update_session_auth_hash
-from django.shortcuts import render
 from datetime import date
 from .models import Producto,User,Carrito,Carrito_item,Registro,RegistroItem
-from django.shortcuts import get_object_or_404, redirect
-from .forms import UpdateUserForm, FiltroProductoForm,UsernameEmailForm
 from os import remove, path
 from django.conf import settings
 from django.contrib.auth import logout
-from django.urls import reverse
-from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import F, Sum
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import update_session_auth_hash
-
 
 
 #######################CREA CUENTA DE USUARIO##################################
