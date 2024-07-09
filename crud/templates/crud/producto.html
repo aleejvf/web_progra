@@ -61,8 +61,9 @@
             <h3>{{item.nombre}}</h3>
             <hr>
             <p>{{item.descripcion}}</p>
-            <p>{{item.categoria| capfirst}}</p>
-            <p>${{item.precio}}</p>
+            <p>Tipo: {{item.categoria| capfirst}}</p>
+            <p>Precio: ${{item.precio}}</p>
+            <p>stock: {{item.cantidad_disponible}}</p>
 
             <div class="py-4">
                 <button onclick="menos()"><i class="bi bi-dash"></i></button>

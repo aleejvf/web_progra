@@ -130,10 +130,7 @@
 
                 </ul>
 
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
-                </form>
+                
             </div>
         </div>
     </nav>
@@ -145,6 +142,7 @@
         <div class="col-sm-4">I RECIBE EN TU DOMICILIO I</div>
         <div class="col-sm-4">I RETIRA EN TIENDA I</div>
     </div>
+   
     {% block contenido %}
 
 
@@ -185,6 +183,10 @@
                         <p>
                             <a class="text-white">Anillos</a>
                         </p>
+                        <p>
+                            <a class="text-white">Collares</a>
+                        </p>
+                        
                     </div>
 
                     <!-- Grid column -->
@@ -245,7 +247,18 @@
         <!-- Grid container -->
     </footer>
     <!-- Footer -->
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages%}
+        {% for m in messages%}
+            <script > 
+                swal.fire({
+                    "title":"Felicidades",
+                    "text": "{{m}}",
+                })
+            </script>
+        {% endfor %}
+    {% endif %}
+    
 
 </body>
 

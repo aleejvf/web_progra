@@ -14,7 +14,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto,User,Registro,RegistroItem
 from .forms import Productoform,UpdateUserForm
-
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 
 
 
@@ -551,30 +551,35 @@ def pagar_s(request):
 
 
 
+# super user
+def es_superusuario(user):
+    return user.is_superuser
 
-# Create your views here.
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_agregar_prod(request):
-    data ={
+    data = {
         'form': Productoform()
     }
     if request.method == 'POST':
-        formulario = Productoform(data=request.POST, files= request.FILES)
+        formulario = Productoform(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request,"Se a agregado correctamente")
+            messages.success(request, "Se ha agregado correctamente")
         else:
             data["form"] = formulario
-    return render(request,'crud/adm_agregar_prod.html',data)
-
-
+    return render(request, 'crud/adm_agregar_prod.html', data)
     
-
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def eliminar_user(request, id):
     usuario = get_object_or_404(User, id=id)
     usuario.delete()
     messages.success(request,"eliminado correctamente")
     return redirect(to="adm_regist_users")
 
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_modificar_prod(request, id):
     producto = get_object_or_404(Producto, id=id)
     data = {
@@ -590,16 +595,21 @@ def adm_modificar_prod(request, id):
         data["form"] = formulario
     return render(request, 'crud/adm_modificar_prod.html', data)
     
-
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
     messages.success(request, "Producto eliminado correctamente.")
     return redirect("adm_productos")
 
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_index(request):
     return render(request,'crud/adm_index.html')
 
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_productos(request):
     productos = Producto.objects.all()
     data = {
@@ -607,7 +617,8 @@ def adm_productos(request):
     }
     return render(request,'crud/adm_productos.html',data)
 
-
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_regist_users(request):
     usuario = User.objects.all()
     data = {
@@ -620,7 +631,8 @@ def adm_regist_users(request):
 def index(request):
     return render(request,'crud/index.html')
 
-
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_agregar_user(request):
     if request.method == 'POST':
         # Obtenemos los datos del formulario
@@ -657,7 +669,8 @@ def adm_agregar_user(request):
         nuevo_usuario.save()
 
         # Redirigimos a una página de éxito o cualquier otra acción que desees realizar después de guardar
-        return redirect(to='adm_regist_users')
+        messages.success(request,"Se a agregado correctamente")
+        return redirect(to='adm_agregar_user')
 
     else:
         # Si no es una solicitud POST, simplemente renderizamos el formulario vacío
@@ -665,6 +678,8 @@ def adm_agregar_user(request):
 
 
 #######################MUESTRA LAS COMPRAS DEL USUARIO#########################
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_regist_compras(request):
     registros = Registro.objects.all().order_by('-fecha_compra')
     context = {
@@ -674,6 +689,8 @@ def adm_regist_compras(request):
 ###############################################################################
 
 #######################MUESTRA EL DETALLE DE LAS COMPRAS#######################
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_detalle_registro(request, id):
     registro = get_object_or_404(Registro, id=id)
     items = RegistroItem.objects.filter(compra=registro)
@@ -683,6 +700,8 @@ def adm_detalle_registro(request, id):
     }
     return render(request, 'crud/adm_detalle_registro.html', context)
 ###############################################################################
+# redireccion de pag por usuario sin ermisos    
+@user_passes_test(es_superusuario, login_url='index')
 def adm_modificar_user(request,id):
     persona=get_object_or_404(User,id=id)
     form=UpdateUserForm(instance=persona)
@@ -699,6 +718,7 @@ def adm_modificar_user(request,id):
                  # cierra automaticamente cuando se actualiza contraseña)
                 update_session_auth_hash(request, usuario_modificado) 
             usuario_modificado.save()
+            messages.success(request,"modificado correctamente")
             return redirect(to='adm_regist_users')
 
     datos={

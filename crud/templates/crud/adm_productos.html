@@ -4,7 +4,7 @@
     {% block links%}
       <link rel="stylesheet" href=" {% static 'crud/CSS/styles.css'%}">
     {% endblock links %}
-    
+
 
 
     {% block contenido%}
@@ -55,7 +55,7 @@
                             </a>
                             <form id="eliminarForm{{ p.id }}" method="post" action="{% url 'eliminar_producto' p.id %}">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                <button href="#" onclick="eliminarProducto({{ p.id }})" type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -64,6 +64,7 @@
                         <td colspan="7">No hay productos disponibles.</td>
                     </tr>
                     {% endfor %}
+                   
                     <!-- Agregar más filas según sea necesario -->
                 </tbody>
             </table>

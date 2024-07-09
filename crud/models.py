@@ -33,8 +33,8 @@ class Producto(models.Model):
     nombre=models.CharField(max_length=50, null=False)
     descripcion = models.TextField()
     foto = models.ImageField(upload_to='productos',null=True)
-    precio=models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    cantidad_disponible = models.IntegerField(default=0, validators=[MinValueValidator(0)])    
+    precio = models.IntegerField(default=1, validators=[MinValueValidator(1)], null=False, blank=False)
+    cantidad_disponible = models.IntegerField(default=1, validators=[MinValueValidator(1)], null=False, blank=False)
     categoria = models.CharField(max_length=6, choices=TIPO_CHOICES)
     tamaño = models.CharField(max_length=7, choices=TAMAÑO_CHOICES)
 
